@@ -1,0 +1,16 @@
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary);
+    color: var(--foreground);
+    height: 100px;
+    padding: 40px;
+}
+
+.navListContainer {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    font-size: 1.25rem;
+}
