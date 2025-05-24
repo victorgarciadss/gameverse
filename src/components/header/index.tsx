@@ -12,7 +12,7 @@ export function Header() {
                         <li>Login</li>
                     </Link>
                     
-                    <Link href={"/"}>
+                    <Link href={"/register"}>
                         <li>Cadastro</li>
                     </Link>
                     

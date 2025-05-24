@@ -8,3 +8,8 @@ export interface IUser {
     createdAt?: Date;
     role: "admin" | "user";
 }
+
+export interface UserCredentials {
+    username: string;
+    password: string;
+}
