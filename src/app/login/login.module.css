@@ -1,0 +1,56 @@
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.titleContainer {
+    color: var(--foreground);
+    font-size: 1.75rem;
+    margin: 1.5rem;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--secondary);
+    color: var(--text-black);
+    padding: 2.5rem;
+    border-radius: 14px;
+    gap: 1.5rem;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.inputContainer input {
+    width: 25rem;
+    height: 40px;
+    padding: 0 0.5rem;
+    outline: none;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    background-color: var(--accent);
+    height: 40px;
+    border: none;
+    width: 15rem;
+    cursor: pointer;
+}
+
+.redirectToRegister {
+    display: flex;
+    text-align: center;
+}

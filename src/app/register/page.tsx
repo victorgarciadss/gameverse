@@ -5,7 +5,7 @@ import styles from "./register.module.css";
 import { registerAction } from "./action";
 import { useActionState } from "react";
 import { useContext, useEffect } from "react";
-import { ToastContext } from "../contexts/ToastProvider";
+import { ToastContext } from "../../contexts/ToastProvider";
 import { redirect } from "next/navigation";
 
 const initialState = { error: undefined };

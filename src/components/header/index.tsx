@@ -8,7 +8,7 @@ export function Header() {
 
             <nav>
                 <ul className={styles.navListContainer}>
-                    <Link href={"/"}>
+                    <Link href={"/login"}>
                         <li>Login</li>
                     </Link>
                     
