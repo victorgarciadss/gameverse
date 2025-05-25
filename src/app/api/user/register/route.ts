@@ -8,7 +8,7 @@ export async function POST(request: Request) {
 
         if(!username || !password) {
             return NextResponse.json(
-                { error: "Campos obrigatórios" },
+                { error: "Campos username e senha são obrigatórios" },
                 { status: 400 }
             );
         }
@@ -18,7 +18,11 @@ export async function POST(request: Request) {
         return NextResponse.json({ message: "Usuário cadastrado com sucesso", user: newUser });
     }
     catch(err: any) {
-        console.log("Seguinte erro: ", err);
-        NextResponse.json({ error: err.message || "Erro no servidor ao cadastrar usuário" }, { status: 500 });
+
+        if (err.message === "Nome de usuário já está cadastrado") {
+            return NextResponse.json({ error: err.message }, { status: 409 });
+        }
+
+        return NextResponse.json({ error: err.message || "Erro no servidor ao cadastrar usuário" }, { status: 500 });
     }
 }

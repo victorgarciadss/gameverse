@@ -1,6 +1,6 @@
 "use server"
 
-export async function registerAction(formData: FormData) {
+export async function registerAction(prevState: any, formData: FormData) {
     try {
         const username = formData.get("username");
         const name = formData.get("name");
@@ -26,10 +26,13 @@ export async function registerAction(formData: FormData) {
         if (!response.ok) {
             const errorBody = await response.json();
             console.error('Erro da API:', errorBody);
-            throw new Error(errorBody.message || "Erro ao cadastrar usuário");
+            return { error: errorBody.error || "Erro ao cadastrar usuário" };
         }
+
+        return { success: "Usuário cadastrado com sucesso" };
     }
     catch (err: any) {
         console.error("Erro no processamento do cadastro: ", err);
+        return { error: err.message || "Erro no servidor ao cadastrar usuário" };
     }
 }

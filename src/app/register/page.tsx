@@ -1,13 +1,36 @@
+"use client";
+
 import Link from "next/link";
 import styles from "./register.module.css";
 import { registerAction } from "./action";
+import { useActionState } from "react";
+import { useContext, useEffect } from "react";
+import { ToastContext } from "../contexts/ToastProvider";
+import { redirect } from "next/navigation";
+
+const initialState = { error: undefined };
 
 export default function Register() {
+
+    const [state, formAction] = useActionState(registerAction, initialState);
+    const { showToastSuccess, showToastError } = useContext(ToastContext);
+
+    useEffect(() => {
+        console.log("Estado do form:", state);
+        if(state.success) {
+            showToastSuccess(state.success);
+            redirect("/");
+        }
+        else if(state.error) {
+            showToastError(state.error);
+        }
+    }, [state, showToastSuccess, showToastError]);
+
     return (
         <div className={styles.registerContainer}>
             <h1 className={styles.registerPageTitle}>Realize seu cadastro inserindo os dados abaixo:</h1>
 
-            <form className={styles.formContainer} action={registerAction}>
+            <form className={styles.formContainer} action={formAction}>
                 <div className={styles.inputContainer}>
                     <label htmlFor="">Digite seu nome de usuário: <span className={styles.requiredData}>*</span> </label>
                     <input type="text" name="username" placeholder="Username..." />
