@@ -27,9 +27,16 @@ export const authOptions: NextAuthOptions = {
                 ...session,
                 user: {
                     ...session.user,
-                    id: token.sub
+                    id: token.sub,
+                    name: token.name,
                 }
             }
+        },
+        jwt: async ({ token, user }) => {
+            if(user) {
+                token.name = user.name;
+            }
+            return token;
         }
     },
     pages: {

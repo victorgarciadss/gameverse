@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "../contexts/ToastProvider";
 import { ToastContainer } from "react-toastify";
+import { CustomSessionProvider } from "@/components/customSessionProvider/CustomSessionProvider";
+
 
 
 
@@ -24,11 +26,12 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${inter.className}`}>
-        <ToastProvider>
-          <ToastContainer />
-          {children}
-        </ToastProvider>
-        
+        <CustomSessionProvider>
+          <ToastProvider>
+            <ToastContainer />
+            {children}
+          </ToastProvider>
+        </CustomSessionProvider>
       </body>
     </html>
   );
