@@ -16,7 +16,6 @@ export default function Register() {
     const { showToastSuccess, showToastError } = useContext(ToastContext);
 
     useEffect(() => {
-        console.log("Estado do form:", state);
         if(state.success) {
             showToastSuccess(state.success);
             redirect("/");
@@ -58,7 +57,7 @@ export default function Register() {
 
                 <div className={styles.inputContainer}>
                     <label htmlFor="">Insira sua data de nascimento</label>
-                    <input type="date" name="birthDate" />
+                    <input type="date" name="birthdate" />
                 </div>
 
                 <div className={styles.buttonContainer}>

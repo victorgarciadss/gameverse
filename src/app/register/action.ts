@@ -7,7 +7,7 @@ export async function registerAction(prevState: any, formData: FormData) {
         const password = formData.get("password");
         const email = formData.get("email");
         const phone = formData.get("phone");
-        const birthDate = formData.get("birthDate");
+        const birthdate = formData.get("birthdate");
 
 
         const response = await fetch("http://localhost:3000/api/user/register", {
@@ -19,7 +19,7 @@ export async function registerAction(prevState: any, formData: FormData) {
                 password,
                 email,
                 phone,
-                birthDate
+                birthdate
             })
         });
 
