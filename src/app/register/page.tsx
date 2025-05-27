@@ -33,22 +33,22 @@ export default function Register() {
             <form className={styles.formContainer} action={formAction}>
                 <div className={styles.inputContainer}>
                     <label htmlFor="">Digite seu nome de usuário: <span className={styles.requiredData}>*</span> </label>
-                    <input type="text" name="username" placeholder="Username..." />
+                    <input type="text" name="username" placeholder="Username..." required />
                 </div>
 
                 <div className={styles.inputContainer}>
                     <label htmlFor="">Digite seu nome e sobrenome: <span className={styles.requiredData}>*</span></label>
-                    <input type="text" name="name" placeholder="Nome completo..."/>
+                    <input type="text" name="name" placeholder="Nome completo..." required />
                 </div>
 
                 <div className={styles.inputContainer}>
                     <label htmlFor="">Digite sua senha: <span className={styles.requiredData}>*</span></label>
-                    <input type="password" name="password" placeholder="Senha..." />
+                    <input type="password" name="password" placeholder="Senha..." required />
                 </div>
 
                 <div className={styles.inputContainer}>
                     <label htmlFor="">Digite seu e-mail: <span className={styles.requiredData}>*</span></label>
-                    <input type="email" name="email" placeholder="Email..." />
+                    <input type="email" name="email" placeholder="Email..." required />
                 </div>
 
                 <div className={styles.inputContainer}>
