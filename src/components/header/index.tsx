@@ -9,6 +9,11 @@ export function Header() {
 
     const { data: session, status } = useSession();
 
+    function getFirstName(fullName: string): string {
+      const completeNameArr: string[] = fullName.trim().split(" ");
+      return completeNameArr[0] || "Usuário";
+    }
+
     return (
         status === "loading" ?
             (<p>Carregando...</p>)
@@ -18,7 +23,7 @@ export function Header() {
                     <h1>GameVerse</h1>
                     <nav>
                         <ul className={styles.navListContainer}>
-                            <p>Bem vindo {session?.user.name || "Usuário"}</p>
+                            <p>Bem vindo(a) {session?.user.name && getFirstName(session?.user.name)}</p>
                         </ul>
                     </nav>
                 </header>    
