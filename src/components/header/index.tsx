@@ -3,7 +3,9 @@
 import Link from 'next/link';
 import styles from './header.module.css';
 
+
 import { useSession } from "next-auth/react";
+import UserMenu from '../userMenu/UserMenu';
 
 export function Header() {
 
@@ -16,7 +18,7 @@ export function Header() {
 
     return (
         status === "loading" ?
-            (<p>Carregando...</p>)
+            (<p className={styles.loadItem}>Carregando...</p>)
             : 
             status !== "unauthenticated" ? (   
                 <header className={styles.headerContainer}>
@@ -24,6 +26,7 @@ export function Header() {
                     <nav>
                         <ul className={styles.navListContainer}>
                             <p>Bem vindo(a) {session?.user.name && getFirstName(session?.user.name)}</p>
+                            <UserMenu />
                         </ul>
                     </nav>
                 </header>    

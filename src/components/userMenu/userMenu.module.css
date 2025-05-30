@@ -1,0 +1,6 @@
+.userIcon{
+    font-size: 2rem;
+    color: var(--foreground);
+    outline: none;
+    box-shadow: none;
+}
