@@ -23,6 +23,7 @@ export async function loginUser(credentials: UserCredentials) {
 
     return {
         id: user._id.toString(),
-        name: user.name
+        name: user.name,
+        role: user.role
     }
 }

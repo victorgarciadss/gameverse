@@ -2,13 +2,12 @@ import { getServerSession, type DefaultSession, type NextAuthOptions } from "nex
 
 import Credentials from "next-auth/providers/credentials";
 import { loginUser } from "../user/loginHandler";
-import { UserModel } from "@/models/User";
-import bcrypt from "bcryptjs";
 import { UserCredentials } from "@/utils/interfaces/userInterfaces";
 import dbConnect from "@/lib/mongodb";
 
 export type User = {
     id: string;
+    role: string;
 } & DefaultSession["user"];
 
 declare module "next-auth" {
@@ -29,12 +28,14 @@ export const authOptions: NextAuthOptions = {
                     ...session.user,
                     id: token.sub,
                     name: token.name,
+                    role: token.role
                 }
             }
         },
         jwt: async ({ token, user }) => {
             if(user) {
                 token.name = user.name;
+                token.role = user.role;
             }
             return token;
         }

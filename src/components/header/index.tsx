@@ -23,7 +23,12 @@ export function Header() {
             status !== "unauthenticated" ? (   
                 <header className={styles.headerContainer}>
                     <h1>GameVerse</h1>
-                    <nav>
+                    <nav className={styles.navListContainer}>
+                        <ul>
+                            {session?.user.role === "admin" && (
+                                <Link href={"/dasboard"}>Dasboard</Link>
+                            )}
+                        </ul>
                         <ul className={styles.navListContainer}>
                             <p>Bem vindo(a) {session?.user.name && getFirstName(session?.user.name)}</p>
                             <UserMenu />
