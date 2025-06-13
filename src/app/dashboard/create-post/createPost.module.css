@@ -1,0 +1,50 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    min-height: calc(100vh - 100px);
+}
+
+.title {
+    color: var(--foreground);
+    text-align: center;
+    margin: 2rem 0;
+    font-size: 2.25rem;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    color: var(--foreground);
+    gap: 0.5rem;
+}
+
+.formContainer label {
+    align-self: flex-start;
+    font-size: 1.25rem;
+}
+
+.inputTitle {
+    width: 100%;
+    height: 60px;
+    padding: 0 1rem;
+    font-size: 1.125rem;
+    outline: none;
+    border: none;
+    background-color: #272727;
+    color: var(--foreground);
+    box-shadow: 8px 8px 8px #000;
+}
+
+.inputContent {
+    width: 100%;
+}
