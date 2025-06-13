@@ -47,4 +47,70 @@
 
 .inputContent {
     width: 100%;
+    min-height: 500px;
+    outline: none;
+    background-color: #272727;
+    color: var(--foreground);
+    padding: 1rem;
+    font-size: 1rem;
+    border: none;
 }
+
+.inputFiles {
+    width: 100%;
+}
+
+.inputFiles::file-selector-button {
+    width: 100%;
+    background-color: var(--secondary);
+    height: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--text-black);
+    border: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.clearFilesButton {
+    width: 20rem;
+    background-color: white;
+    height: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    align-self: flex-start;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.filesSelectedTitle {
+    color: var(--foreground);
+    align-self: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.filesList {
+    list-style: none;
+    align-self: flex-start;
+}
+
+
+.postButton {
+    border: none;
+    min-width: 10rem;
+    width: 50%;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: var(--primary);
+    color: var(--foreground);
+    height: 50px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.postButton:hover {
+    background-color: var(--accent);
+}
+

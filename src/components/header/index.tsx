@@ -26,7 +26,7 @@ export function Header() {
                     <nav className={styles.navListContainer}>
                         <ul>
                             {session?.user.role === "admin" && (
-                                <Link href={"/dashboard"}>Dasboard</Link>
+                                <Link href={"/dashboard"}>Dashboard</Link>
                             )}
                         </ul>
                         <ul className={styles.navListContainer}>

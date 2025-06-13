@@ -5,16 +5,7 @@ import { loginUser } from "../user/loginHandler";
 import { UserCredentials } from "@/utils/interfaces/userInterfaces";
 import dbConnect from "@/lib/mongodb";
 
-export type User = {
-    id: string;
-    role: string;
-} & DefaultSession["user"];
 
-declare module "next-auth" {
-    interface Session extends DefaultSession {
-        user: User
-    }
-}
 
 export const authOptions: NextAuthOptions = {
     session: {

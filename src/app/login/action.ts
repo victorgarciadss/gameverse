@@ -16,7 +16,6 @@ export async function loginAction(prevState: any, formData: FormData) {
             return { error: "Usuário ou senha incorretos!!" }
         }
 
-        console.log(response);
         return { success: true };
 
     }
