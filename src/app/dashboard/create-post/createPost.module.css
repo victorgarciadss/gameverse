@@ -83,6 +83,7 @@
     align-self: flex-start;
     cursor: pointer;
     border-radius: 8px;
+    margin: 1rem 0;
 }
 
 .filesSelectedTitle {

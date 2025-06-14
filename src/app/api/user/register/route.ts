@@ -1,8 +1,8 @@
 import { CustomError } from "@/errors/CustomError";
 import { registerUser } from "@/server/user/registerHandler";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
         const newUser = await registerUser(body);
