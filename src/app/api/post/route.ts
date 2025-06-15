@@ -1,6 +1,17 @@
 import { CustomError } from "@/errors/CustomError";
+import { getAllPosts } from "@/server/post/fetchHandler";
 import { registerPost } from "@/server/post/registerHandler";
 import { NextRequest, NextResponse } from "next/server";
+
+export async function GET() {
+    try {
+        const posts = await getAllPosts();
+        return NextResponse.json(posts);
+    }
+    catch(err: any) {
+        return NextResponse.json({ error: err.message }, { status: 500 });
+    }
+}
 
 export async function POST(request: NextRequest) {
     try {
