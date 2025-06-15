@@ -99,6 +99,9 @@
 
 
 .postButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
     min-width: 10rem;
     width: 50%;
@@ -111,7 +114,24 @@
     border-radius: 8px;
 }
 
-.postButton:hover {
+.postButton:active {
     background-color: var(--accent);
 }
+
+.spinnerIcon {
+    font-size: 1.5rem;
+    margin: 0 1rem;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
 

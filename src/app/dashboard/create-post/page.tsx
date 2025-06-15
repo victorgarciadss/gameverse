@@ -2,11 +2,18 @@
 
 import { Header } from "@/components/header";
 import styles from "./createPost.module.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { ImSpinner8 } from "react-icons/im";
 
 export default function CreatePost() {
 
+    const { data } = useSession();
+    const router = useRouter();
     const [files, setFiles] = useState<File[]>([]);
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const [ loading, setLoading ] = useState<boolean>(false);
 
     function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
         const newFile = event.target.files;
@@ -17,9 +24,53 @@ export default function CreatePost() {
         setFiles((prevFiles) => [...prevFiles, ...Array.from(newFile)]);
     }
 
+
     function clearFiles(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
         setFiles([]);
+
+        if(fileInputRef.current) {
+            fileInputRef.current.value = "";
+        }
+    }
+
+    async function handleSubmitPost(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        
+        // para envio na requisição post
+        const postData = new FormData();
+        postData.append("title", formData.get("title") as string);
+        postData.append("content", formData.get("content") as string);
+        postData.append("author", data?.user.name || "Desconhecido");
+
+        files.forEach(file => {
+            postData.append("files", file);
+        });
+
+        setLoading(true);
+
+        try {
+            const response = await fetch("http://localhost:3000/api/post/register", {
+                method: "POST",
+                body: postData
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.json();
+                console.error('Erro da API:', errorBody);
+                setLoading(false);
+            }
+
+            const responseData = await response.json();
+            console.log("Post criado com sucesso:", responseData);
+
+            router.push("/dashboard");
+        }
+        catch(err) {
+            console.error("Erro ao enviar o post:", err);
+            setLoading(false);
+        }
     }
 
 
@@ -30,7 +81,7 @@ export default function CreatePost() {
             <main className={styles.mainContainer}>
                 <h1 className={styles.title}>Escreva seu Post</h1>
                 
-                <form className={styles.formContainer}>
+                <form className={styles.formContainer} onSubmit={handleSubmitPost}>
                     <div className={styles.formGroup}>
                         <label htmlFor="title">Título</label>
                         <input className={styles.inputTitle} type="text" name="title" required />
@@ -43,7 +94,8 @@ export default function CreatePost() {
                     
                     <div className={styles.formGroup}>
                         <label htmlFor="files">Anexe os arquivos desejados:</label>
-                        <input 
+                        <input
+                            ref={fileInputRef}
                             onChange={handleFileChange}
                             className={styles.inputFiles}
                             type="file"
@@ -53,6 +105,7 @@ export default function CreatePost() {
                         <button
                             className={styles.clearFilesButton}
                             onClick={clearFiles}
+                            type="button"
                         >
                             Limpar arquivos anexados
                         </button>
@@ -70,7 +123,16 @@ export default function CreatePost() {
                     )}
 
                     <div className={styles.formGroup}>
-                        <button type="submit" className={styles.postButton}>Publicar Post</button>
+                        <button type="submit" className={styles.postButton}>
+                            {loading ? (
+                                <>
+                                    <span>Publicando...</span>
+                                    <ImSpinner8 className={styles.spinnerIcon} />
+                                </>
+                            ) : (
+                                "Publicar Post"
+                            )}
+                        </button>
                     </div>
                 </form>
             </main>
