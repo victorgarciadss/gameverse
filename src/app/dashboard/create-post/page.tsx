@@ -2,15 +2,17 @@
 
 import { Header } from "@/components/header";
 import styles from "./createPost.module.css";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ImSpinner8 } from "react-icons/im";
+import { ToastContext } from "@/contexts/ToastProvider";
 
 export default function CreatePost() {
 
     const { data } = useSession();
     const router = useRouter();
+    const { showToastSuccess, showToastError } = useContext(ToastContext);
     const [files, setFiles] = useState<File[]>([]);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [ loading, setLoading ] = useState<boolean>(false);
@@ -58,17 +60,17 @@ export default function CreatePost() {
 
             if (!response.ok) {
                 const errorBody = await response.json();
-                console.error('Erro da API:', errorBody);
+                showToastError(errorBody.error);
                 setLoading(false);
             }
-
-            const responseData = await response.json();
-            console.log("Post criado com sucesso:", responseData);
-
-            router.push("/dashboard");
+            else {
+                const responseData = await response.json();
+                showToastSuccess("Post criado com sucesso!");
+                router.push("/dashboard");
+            }  
         }
         catch(err) {
-            console.error("Erro ao enviar o post:", err);
+            showToastError("Erro ao enviar o post: " + err);
             setLoading(false);
         }
     }
