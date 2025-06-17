@@ -1,0 +1,58 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.subtitle {
+    color: var(--foreground);
+    margin: 2rem 0;
+}
+
+.imageContainer {
+    width: 100%;
+    min-width: 20rem;
+    position: relative;
+}
+
+.overImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 70%;
+    border-radius: 8px;
+    color: var(--foreground);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.linkToFeaturedPost {
+    background-color: var(--accent);
+    width: 20rem;
+    height: 70px;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+}
+
+.featuredImage {
+    width: 70%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.postsSection {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 3rem;
+    margin: 4rem 0;
+}

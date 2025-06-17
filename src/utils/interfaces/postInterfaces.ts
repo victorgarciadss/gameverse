@@ -13,3 +13,13 @@ export interface IPost {
     author: string;
     images?: string[];
 }
+
+export interface IPostResponse extends IPost {
+    _id: string;
+}
+
+export interface PostProps {
+    title: string;
+    images?: string[];
+    createdAt?: Date;
+}
