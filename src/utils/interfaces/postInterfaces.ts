@@ -12,6 +12,7 @@ export interface IPost {
     createdAt?: Date;
     author: string;
     images?: string[];
+    slug: string
 }
 
 export interface IPostResponse extends IPost {

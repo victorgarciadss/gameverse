@@ -4,6 +4,7 @@ import { PostModel } from "@/models/Post";
 import { IPostRequest } from "@/utils/interfaces/postInterfaces";
 
 import { v2 as cloudinary } from "cloudinary";
+import slugify from "slugify";
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -51,15 +52,19 @@ export async function registerPost(data: IPostRequest) {
         }
     }
 
+    const slug = slugify(title, { lower: true, strict: true });
+
     const newPost = await PostModel.create({
         title,
         content,
         author,
-        images: imagesUrls
+        images: imagesUrls,
+        slug
     });
 
     return {
         id: newPost._id.toString(),
-        title: newPost.title
+        title: newPost.title,
+        slug: newPost.slug
     }
 }

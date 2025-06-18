@@ -21,6 +21,11 @@ const postSchema = new mongoose.Schema<IPost>({
     images: {
         type: [String],
         required: false
+    },
+    slug: {
+        type: String,
+        required: true,
+        unique: true
     }
 });
 
