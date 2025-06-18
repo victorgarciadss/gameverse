@@ -37,7 +37,7 @@ export default async function Home() {
 
           <div className={styles.overImage}>
             <h3 className={styles.featuredPostTitle}>{featuredPost.title}</h3>
-            <Link href={""} className={styles.linkToFeaturedPost} >
+            <Link href={`/posts/${featuredPost.slug}`} className={styles.linkToFeaturedPost} >
               Ler post completo
             </Link>
           </div>
@@ -47,12 +47,13 @@ export default async function Home() {
           {
             posts.map((post: IPostResponse) => {
               return (
-                <PostComponent
-                  key={post._id}
-                  title={post.title}
-                  images={post.images && post.images?.length > 0 ? post.images : ["/default-image.png"]}
-                  createdAt={post.createdAt}
-                />
+                <Link href={`/posts/${post.slug}`} key={post._id} >
+                  <PostComponent
+                    title={post.title}
+                    images={post.images && post.images?.length > 0 ? post.images : ["/default-image.png"]}
+                    createdAt={post.createdAt}
+                  />
+                </Link>
               )
             })
           }
