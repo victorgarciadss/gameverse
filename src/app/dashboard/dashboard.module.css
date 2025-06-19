@@ -53,3 +53,48 @@
 .createPostButton:hover {
     background-color: #736586;
 }
+
+.infoToAdminContainer {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cardsToInfo {
+    display: flex;
+    gap: 1rem;
+}
+
+.card {
+    background-color: var(--background-less);
+    color: var(--foreground);
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.icon {
+    font-size: 2rem;
+}
+
+.table {
+    background-color: var(--background-less);
+    color: var(--foreground);
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 0.875rem;
+  border-bottom: 1px solid #444;
+}
+
+.tableLine {
+    border: 1px solid #fff;
+    
+}
