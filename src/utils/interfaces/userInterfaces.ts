@@ -9,6 +9,10 @@ export interface IUser {
     role: "admin" | "user";
 }
 
+export interface IUserResponse extends IUser {
+    _id: string;
+}
+
 export interface UserCredentials {
     username: string;
     password: string;

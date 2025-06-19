@@ -1,0 +1,30 @@
+.table {
+    background-color: var(--background-less);
+    color: var(--foreground);
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    padding: 1rem;
+}
+
+.table td {
+    padding: 0.875rem;
+}
+
+.table th,
+.table td {
+    text-align: left;
+    border: 1px solid #fff;
+}
+
+.actionsContainer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.25rem;
+}
+
+.actionContainer {
+    cursor: pointer;
+}
