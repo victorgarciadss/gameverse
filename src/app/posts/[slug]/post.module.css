@@ -1,0 +1,37 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 4rem;
+}
+
+.postTitle {
+    color: var(--foreground);
+    margin-bottom: 3rem;
+    font-size: 3rem;
+}
+
+.secondaryInfos {
+    color: var(--foreground);
+    display: flex;
+    gap: 0.25rem;
+}
+
+.postAuthor {
+    color: var(--secondary);
+}
+
+.postContainer {
+    color: var(--foreground);
+    font-size: 1rem;
+    width: 85%;
+}
+
+.imageContainer {
+    width: 100%;
+    margin: 3rem 0;
+}
+
+.postImage {
+    width: 40rem;
+    height: auto;
+}

@@ -1,12 +1,9 @@
 import { PostProps } from "@/utils/interfaces/postInterfaces";
 import styles from "./postComponent.module.css";
 import Image from "next/image";
+import { formatDate } from "@/utils/functions/formatDate";
 
 export default function PostComponent({ title, images, createdAt } : PostProps) {
-
-    function formatDate(date: Date) : string {
-        return new Date(date).toLocaleDateString("pt-BR");
-    }
 
     return (
         <article className={styles.postContainer}>
