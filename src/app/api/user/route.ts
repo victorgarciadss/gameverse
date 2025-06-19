@@ -1,6 +1,17 @@
 import { CustomError } from "@/errors/CustomError";
+import { getAllUsers } from "@/server/user/fetchHandler";
 import { registerUser } from "@/server/user/registerHandler";
 import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(request: NextRequest) {
+    try {
+        const users = await getAllUsers();
+        return NextResponse.json(users);
+    }
+    catch(err: any) {
+        return NextResponse.json({ error: err.message }, { status: 500 });
+    }
+}
 
 export async function POST(request: NextRequest) {
     try {

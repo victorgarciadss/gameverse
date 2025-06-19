@@ -21,16 +21,32 @@ export default function Dashboard() {
                 cache: "no-store"
             });
 
-            const posts: IPostResponse[] = await response.json();
-            setPosts(posts);
+            const postsFounded: IPostResponse[] = await response.json();
+            setPosts(postsFounded);
         }
         catch(error: any) {
             throw new Error("Erro ao buscar os posts: " + error.message);
         }
     }
 
+    async function getUsers() {
+        try {
+            const response = await fetch("http://localhost:3000/api/user", {
+                method: "GET",
+                cache: "no-store"
+            });
+
+            const usersFounded: IUser[] = await response.json();
+            setUsers(usersFounded);
+        }
+        catch(error: any) {
+            throw new Error("Erro ao buscar usuários: " + error.message);
+        }
+    }
+
     useEffect(() => {
         getPosts();
+        getUsers();
     }, []);
 
     return (
@@ -65,11 +81,11 @@ export default function Dashboard() {
                     <div className={styles.cardsToInfo}>
                         <div className={styles.card}>
                             <span className={styles.icon}>📝</span>
-                            <p>Total de Posts: 25</p>   
+                            <p>Total de Posts: {posts.length}</p>   
                         </div>
                         <div className={styles.card}>
                             <span className={styles.icon}>👥</span>
-                            <p>Total de Usuários: 5</p>
+                            <p>Total de Usuários: {users.length}</p>
                             
                         </div>
                     </div>
