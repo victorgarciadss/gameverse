@@ -1,4 +1,5 @@
 import { CustomError } from "@/errors/CustomError";
+import { deletePost } from "@/server/post/deleteHandler";
 import { getAllPosts } from "@/server/post/fetchHandler";
 import { registerPost } from "@/server/post/registerHandler";
 import { NextRequest, NextResponse } from "next/server";
@@ -38,6 +39,20 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: err.message }, { status: err.statusCode });
         }
 
+        return NextResponse.json({ error: err.message }, { status: 500 });
+    }
+}
+
+export async function DELETE(request: NextRequest, id: string) {
+    try {
+
+        const postDeleted = await deletePost(id);
+        return NextResponse.json({ message: "Post apagado com sucesso", post: postDeleted });
+    }
+    catch(err: any) {
+        if(err instanceof CustomError) {
+            return NextResponse.json({ error: err.message }, { status: err.statusCode });
+        }
         return NextResponse.json({ error: err.message }, { status: 500 });
     }
 }
