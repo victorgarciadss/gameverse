@@ -43,16 +43,3 @@ export async function POST(request: NextRequest) {
     }
 }
 
-export async function DELETE(request: NextRequest, id: string) {
-    try {
-
-        const postDeleted = await deletePost(id);
-        return NextResponse.json({ message: "Post apagado com sucesso", post: postDeleted });
-    }
-    catch(err: any) {
-        if(err instanceof CustomError) {
-            return NextResponse.json({ error: err.message }, { status: err.statusCode });
-        }
-        return NextResponse.json({ error: err.message }, { status: 500 });
-    }
-}
