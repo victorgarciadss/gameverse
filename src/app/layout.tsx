@@ -4,6 +4,7 @@ import "./globals.css";
 import { ToastProvider } from "../contexts/ToastProvider";
 import { ToastContainer } from "react-toastify";
 import { CustomSessionProvider } from "@/components/customSessionProvider/CustomSessionProvider";
+import { DashboardProvider } from "@/contexts/DashboardProvider";
 
 
 
@@ -28,8 +29,10 @@ export default function RootLayout({
       <body className={`${inter.className}`}>
         <CustomSessionProvider>
           <ToastProvider>
-            <ToastContainer />
-            {children}
+            <DashboardProvider>
+              <ToastContainer />
+              {children}
+            </DashboardProvider>
           </ToastProvider>
         </CustomSessionProvider>
       </body>

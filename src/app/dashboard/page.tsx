@@ -3,60 +3,23 @@
 import { Header } from "@/components/header";
 import styles from "./dashboard.module.css";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { IPostResponse } from "@/utils/interfaces/postInterfaces";
-import { IUser, IUserResponse } from "@/utils/interfaces/userInterfaces";
-import { formatDate } from "@/utils/functions/formatDate";
+import { useContext, useEffect, useState } from "react";
 import UserTable from "@/components/tables/UserTable";
 import PostTable from "@/components/tables/PostTable";
+import { DashboardContext } from "@/contexts/DashboardProvider";
 
 
 export default function Dashboard() {
 
-    const [posts, setPosts] = useState<IPostResponse[]>([]);
-    const [users, setUsers] = useState<IUserResponse[]>([]);
-    const [group, setGroup] = useState<"posts" | "users">("posts");
-
-    async function getPosts() {
-        try {
-            const response = await fetch("http://localhost:3000/api/post", {
-                method: "GET",
-                cache: "no-store"
-            });
-
-            const postsFounded: IPostResponse[] = await response.json();
-            setPosts(postsFounded);
-        }
-        catch(error: any) {
-            throw new Error("Erro ao buscar os posts: " + error.message);
-        }
-    }
-
-    async function getUsers() {
-        try {
-            const response = await fetch("http://localhost:3000/api/user", {
-                method: "GET",
-                cache: "no-store"
-            });
-
-            const usersFounded: IUserResponse[] = await response.json();
-            setUsers(usersFounded);
-        }
-        catch(error: any) {
-            throw new Error("Erro ao buscar usuários: " + error.message);
-        }
-    }
-
-    function handleFetchPosts() {
-        getPosts();
-        setGroup("posts");
-    }
-
-    function handleFetchUsers() {
-        getUsers();
-        setGroup("users");
-    }
-
+    const { posts,
+        users,
+        group,
+        getPosts,
+        getUsers,
+        handleFetchPosts,
+        handleFetchUsers
+    } = useContext(DashboardContext);
+    
     useEffect(() => {
         getPosts();
         getUsers();

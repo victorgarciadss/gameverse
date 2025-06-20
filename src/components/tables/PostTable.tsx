@@ -9,17 +9,17 @@ import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { useContext, useEffect, useState } from "react";
 import { ToastContext } from "@/contexts/ToastProvider";
+import { DashboardContext } from "@/contexts/DashboardProvider";
 
+type PostTableProps = {
+    posts: IPostResponse[];
+}
 
-export default function PostTable({ posts }: { posts: IPostResponse[] }) {
+export default function PostTable({ posts } : PostTableProps) {
 
     const { showToastSuccess, showToastError } = useContext(ToastContext);
-    const [postsInTable, setPostsInTable] = useState(posts);
+    const { adjustPostDataInterface } = useContext(DashboardContext);
     
-
-    useEffect(() => {
-        setPostsInTable(posts);
-    }, [posts]);
 
     async function deletePost(slug: string) {
         try {
@@ -37,7 +37,7 @@ export default function PostTable({ posts }: { posts: IPostResponse[] }) {
 
     async function handleDeletePost(slug: string) {
         await deletePost(slug);
-        setPostsInTable(prevPosts => prevPosts.filter(post => post.slug !== slug));
+        adjustPostDataInterface(slug);
     }
 
 
@@ -52,7 +52,7 @@ export default function PostTable({ posts }: { posts: IPostResponse[] }) {
                 </tr>
             </thead>
             <tbody>
-                {postsInTable.map((post: IPostResponse) => (
+                {posts.map((post: IPostResponse) => (
                     <tr key={post._id} className={styles.tableLine}>
                         <td>{post.title}</td>
                         <td>{post.author}</td>
