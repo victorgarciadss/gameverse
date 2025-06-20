@@ -20,7 +20,6 @@ export async function GET(request: NextRequest, context: { params: Promise<{ slu
 export async function DELETE(request: NextRequest, context: { params: Promise<{ slug: string }> } ) {
     try {
         const { slug } = await context.params;
-        console.log("chegou na api: " + slug);
 
         const postDeleted = await deletePost(slug);
         return NextResponse.json({ message: "Post apagado com sucesso", post: postDeleted });

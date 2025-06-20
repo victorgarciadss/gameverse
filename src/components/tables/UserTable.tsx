@@ -1,10 +1,35 @@
+import { ToastContext } from "@/contexts/ToastProvider";
 import styles from "./table.module.css";
 import { IUserResponse } from "@/utils/interfaces/userInterfaces";
+import { useContext } from "react";
 
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { DashboardContext } from "@/contexts/DashboardProvider";
 
 export default function UserTable({users} : {users: IUserResponse[]}) {
+
+    const { showToastSuccess, showToastError } = useContext(ToastContext);
+    const { adjustUserDataInterface } = useContext(DashboardContext);
+
+    async function deleteUser(id: string) {
+        try {
+            const response = await fetch(`http://localhost:3000/api/user/${id}`, {
+                method: "DELETE"
+            });
+
+            const resJson = await response.json();
+            showToastSuccess(resJson.message);
+        }
+        catch(err: any) {
+            showToastError(`Ocorreu algum erro ao excluir o usuário: ${err.message}`);
+        }
+    }
+
+    async function handleDeleteUser(id: string) {
+        await deleteUser(id);
+        adjustUserDataInterface(id);
+    }
     
     return (
         <table className={styles.table}>
@@ -29,7 +54,10 @@ export default function UserTable({users} : {users: IUserResponse[]}) {
                         <td>
                             <div className={styles.actionsContainer} >
                                 <MdEdit className={styles.actionContainer} />
-                                <MdDelete className={styles.actionContainer} />
+                                <MdDelete
+                                    onClick={() => handleDeleteUser(user._id)}
+                                    className={styles.actionContainer}
+                                />
                             </div>
                         </td>
                     </tr>
