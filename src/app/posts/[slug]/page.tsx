@@ -35,13 +35,17 @@ export default async function PostPage(context: { params: Promise<{ slug: string
 
                 <article className={styles.postContainer}>
                     <div className={styles.imageContainer}>
-                        <Image
-                            src={postFounded.images![0]}
-                            width={500}
-                            height={300}
-                            alt={"Primeira imagem de jogo do post"}
-                            className={styles.postImage}
-                        />
+                        {postFounded.images?.map((image, index) => (
+                            <Image
+                                key={index}
+                                src={image}
+                                width={500}
+                                height={300}
+                                alt={"Imagem de jogo do post"}
+                                className={styles.postImage}
+                            />
+                        ))}
+                        
                     </div>
                     <div className={styles.postContent}>
                         {postFounded.content}
