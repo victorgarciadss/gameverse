@@ -2,6 +2,8 @@
 
 import styles from "./table.module.css";
 
+import Link from "next/link";
+
 import { IPostResponse } from "@/utils/interfaces/postInterfaces";
 import { formatDate } from "@/utils/functions/formatDate";
 
@@ -59,7 +61,9 @@ export default function PostTable({ posts } : PostTableProps) {
                         <td>{formatDate(post.createdAt!)}</td>
                         <td>
                             <div className={styles.actionsContainer} >
-                                <MdEdit className={styles.actionContainer} />
+                                <Link href={`/dashboard/edit-post/${post.slug}`}>
+                                    <MdEdit className={styles.actionContainer} />
+                                </Link>
                                 <MdDelete onClick={() => handleDeletePost(post.slug)} className={styles.actionContainer} />
                             </div>
                         </td>

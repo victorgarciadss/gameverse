@@ -1,17 +1,23 @@
-"use client";
+"use client"
+
+import { useContext, useEffect, useRef, useState } from "react";
+import styles from "./editPost.module.css";
 
 import { Header } from "@/components/header";
-import styles from "./createPost.module.css";
-import { useContext, useRef, useState } from "react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { ImSpinner8 } from "react-icons/im";
 import { ToastContext } from "@/contexts/ToastProvider";
+import { useParams } from "next/navigation";
 
-export default function CreatePost() {
+import { ImSpinner8 } from "react-icons/im";
+import { IPostResponse } from "@/utils/interfaces/postInterfaces";
 
-    const { data } = useSession();
-    const router = useRouter();
+export default function EditPost() {
+
+    const params = useParams();
+    const slug = params.slug;
+
+    const [post, setPost] = useState<IPostResponse>();
+    const [titleInput, setTitleInput] = useState<string>("");
+    const [contentTextArea, setContentTextArea] = useState<string>("");
     const { showToastSuccess, showToastError } = useContext(ToastContext);
     const [files, setFiles] = useState<File[]>([]);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -36,66 +42,68 @@ export default function CreatePost() {
         }
     }
 
-    async function handleSubmitPost(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-        
-        // para envio na requisição post
-        const postData = new FormData();
-        postData.append("title", formData.get("title") as string);
-        postData.append("content", formData.get("content") as string);
-        postData.append("author", data?.user.name || "Desconhecido");
+    async function handleUpdatePost() {
 
-        files.forEach(file => {
-            postData.append("files", file);
-        });
-
-        setLoading(true);
-
-        try {
-            const response = await fetch("http://localhost:3000/api/post", {
-                method: "POST",
-                body: postData
-            });
-
-            if (!response.ok) {
-                const errorBody = await response.json();
-                showToastError(errorBody.error);
-                setLoading(false);
-            }
-            else {
-                const responseData = await response.json();
-                showToastSuccess("Post criado com sucesso!");
-                router.push("/posts/" + responseData.slug);
-            }  
-        }
-        catch(err) {
-            showToastError("Erro ao enviar o post: " + err);
-            setLoading(false);
-        }
     }
 
+    useEffect(() => {
+        console.log("use effect chamado")
+        async function fetchPost() {
+            const response = await fetch(`http://localhost:3000/api/post/${slug}`, {
+                method: "GET",
+                cache: "no-store"
+            });
+
+            const postResp = await response.json();
+            setPost(postResp);
+            
+        }
+
+        fetchPost();
+        
+    }, []);
+    
+    if(!post) {
+        return (
+            <>
+                <Header />
+                <main className={styles.mainContainer}>Carregando post</main>
+            </>
+        )
+    }
 
     return (
         <>
             <Header />
-            
+
             <main className={styles.mainContainer}>
-                <h1 className={styles.title}>Escreva seu Post</h1>
-                
-                <form className={styles.formContainer} onSubmit={handleSubmitPost}>
+                <h1 className={styles.title}>Editar Post</h1>
+
+                <form className={styles.formContainer} onSubmit={handleUpdatePost}>
                     <div className={styles.formGroup}>
                         <label htmlFor="title">Título</label>
-                        <input className={styles.inputTitle} type="text" name="title" required />
+                        <input
+                            className={styles.inputTitle}
+                            type="text"
+                            name="title"
+                            value={post.title}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitleInput(e.target.value)}
+                            required
+                        />
                     </div>
 
                     <div className={styles.formGroup}>
-                        <label htmlFor="content">Escreva o texto da sua publicação:</label>
-                        <textarea className={styles.inputContent} name="content" ></textarea>
+                        <label htmlFor="content">Edite o texto da sua publicação:</label>
+                        <textarea
+                            className={styles.inputContent}
+                            name="content"
+                            value={post.content}
+                            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setContentTextArea(e.target.value)}
+                        />
                     </div>
-                    
+
                     <div className={styles.formGroup}>
-                        <label htmlFor="files">Anexe os arquivos desejados:</label>
+                        <label htmlFor="files">Anexe novos arquivos (opcional):</label>
                         <input
                             ref={fileInputRef}
                             onChange={handleFileChange}
@@ -128,17 +136,16 @@ export default function CreatePost() {
                         <button type="submit" className={styles.postButton}>
                             {loading ? (
                                 <>
-                                    <span>Publicando...</span>
+                                    <span>Salvando...</span>
                                     <ImSpinner8 className={styles.spinnerIcon} />
                                 </>
                             ) : (
-                                "Publicar Post"
+                                "Salvar Alterações"
                             )}
                         </button>
                     </div>
                 </form>
             </main>
         </>
-        
-    )
+    );
 }

@@ -1,0 +1,20 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    min-height: calc(100vh - 100px);
+}
+
+.title {
+    color: var(--foreground);
+    font-size: 2.25rem;
+    text-align: center;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    color: var(--foreground);
+    align-items: center;
+    
+}
