@@ -65,8 +65,8 @@ export default function CreatePost() {
             }
             else {
                 const responseData = await response.json();
-                showToastSuccess("Post criado com sucesso!");
-                router.push("/posts/" + responseData.slug);
+                showToastSuccess(responseData.message);
+                router.push("/posts/" + responseData.post.slug);
             }  
         }
         catch(err) {

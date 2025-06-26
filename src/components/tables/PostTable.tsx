@@ -56,7 +56,7 @@ export default function PostTable({ posts } : PostTableProps) {
             <tbody>
                 {posts.map((post: IPostResponse) => (
                     <tr key={post._id} className={styles.tableLine}>
-                        <td>{post.title}</td>
+                        <td><Link href={"/posts/" + post.slug}>{post.title}</Link></td>
                         <td>{post.author}</td>
                         <td>{formatDate(post.createdAt!)}</td>
                         <td>

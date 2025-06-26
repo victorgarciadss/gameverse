@@ -4,6 +4,7 @@ export interface IPostRequest {
     createdAt?: Date;
     author: string;
     files?: File[];
+    existingFiles?: string[];
 }
 
 export interface IPost {
