@@ -60,7 +60,8 @@ export default function EditUser() {
             }
             else {
                 showToastSuccess(userResp.message);
-                router.push("/dashboard");
+                // adicionar verificação, se for admin, manda para dashboard, se for user, manda para a página de dados próprios
+                router.push("/");
             }
         }
         catch(err: any) {

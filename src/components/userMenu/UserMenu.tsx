@@ -9,18 +9,27 @@ import { FaUserEdit } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 
 import styles from './userMenu.module.css';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 
 export default function UserMenu() {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    const { data } = useSession();
+    const router = useRouter();
+
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    function redirectToEditUserData() {
+        const userId = data?.user.id;
+        router.push(`/edit-user/${userId}`);
+    }
 
     return (
         <div>
@@ -66,7 +75,7 @@ export default function UserMenu() {
                         display: "flex",
                         gap: "0.5rem"
                     }} 
-                    onClick={handleClose}
+                    onClick={redirectToEditUserData}
                 >
                     <FaUserEdit />
                     Editar meus dados
@@ -77,7 +86,7 @@ export default function UserMenu() {
                         display: "flex",
                         gap: "0.5rem"
                     }} 
-                    onClick={() => signOut()}
+                    onClick={() => signOut({ callbackUrl: "/" })}
                 >
                     <MdLogout />
                     Logout

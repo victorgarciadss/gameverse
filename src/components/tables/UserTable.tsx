@@ -55,7 +55,7 @@ export default function UserTable({users} : {users: IUserResponse[]}) {
                         <td>{user.phone}</td>
                         <td>
                             <div className={styles.actionsContainer} >
-                                <Link href={`/dashboard/edit-user/${user._id}`}>
+                                <Link href={`/edit-user/${user._id}`}>
                                     <MdEdit className={styles.actionContainer} />
                                 </Link>
                                 
