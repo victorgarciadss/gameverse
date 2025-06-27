@@ -7,6 +7,8 @@ import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { DashboardContext } from "@/contexts/DashboardProvider";
 
+import Link from "next/link";
+
 export default function UserTable({users} : {users: IUserResponse[]}) {
 
     const { showToastSuccess, showToastError } = useContext(ToastContext);
@@ -53,7 +55,10 @@ export default function UserTable({users} : {users: IUserResponse[]}) {
                         <td>{user.phone}</td>
                         <td>
                             <div className={styles.actionsContainer} >
-                                <MdEdit className={styles.actionContainer} />
+                                <Link href={`/dashboard/edit-user/${user._id}`}>
+                                    <MdEdit className={styles.actionContainer} />
+                                </Link>
+                                
                                 <MdDelete
                                     onClick={() => handleDeleteUser(user._id)}
                                     className={styles.actionContainer}
