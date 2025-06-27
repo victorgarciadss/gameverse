@@ -21,7 +21,6 @@ export async function GET(request: NextRequest, context: { params: Promise<{ slu
 export async function PUT(request: NextRequest, context: { params: Promise<{ slug: string }> }) {
     try {
         const { slug } = await context.params;
-        console.log("chegou na rota: " + slug);
 
         const formData = await request.formData();
 
