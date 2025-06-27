@@ -8,12 +8,16 @@ import { useParams, useRouter } from "next/navigation";
 import { ToastContext } from "@/contexts/ToastProvider";
 import { ImSpinner8 } from "react-icons/im";
 
+import { useSession } from "next-auth/react";
+
 export default function EditUser() {
 
     const params = useParams();
     const id = params.id;
 
     const router = useRouter();
+    const { data } = useSession();
+
 
     const [ user, setUser ] = useState({
         _id: "",
@@ -61,7 +65,13 @@ export default function EditUser() {
             else {
                 showToastSuccess(userResp.message);
                 // adicionar verificação, se for admin, manda para dashboard, se for user, manda para a página de dados próprios
-                router.push("/");
+                if(data.user.role === "admin") {
+                    router.push("/dashboard");
+                }
+                else {
+                    router.push("/");
+                }
+                
             }
         }
         catch(err: any) {

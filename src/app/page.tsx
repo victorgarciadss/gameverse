@@ -15,9 +15,13 @@ export default async function Home() {
   const posts: IPostResponse[] = await data.json();
   
   let featuredPost: IPostResponse = posts[Math.floor(Math.random() * posts.length)];
-  while (!featuredPost.images || featuredPost.images.length === 0) {
-    featuredPost = posts[Math.floor(Math.random() * posts.length)];
+
+  if(posts.length > 0) {
+    while (!featuredPost.images || featuredPost.images.length === 0) {
+      featuredPost = posts[Math.floor(Math.random() * posts.length)];
+    }
   }
+  
 
   return (
     <>
@@ -25,41 +29,50 @@ export default async function Home() {
 
       <main className={styles.mainContainer}>
         
-        <h2 className={styles.subtitle}>Em destaque</h2>
-        <section className={styles.imageContainer}>
-          <Image
-            src={featuredPost.images![0]}
-            alt={"Imagem em destaque"}
-            width={800}
-            height={500}
-            className={styles.featuredImage}
-          />
-
-          <div className={styles.overImage}>
-            <h3 className={styles.featuredPostTitle}>{featuredPost.title}</h3>
-            <Link href={`/posts/${featuredPost.slug}`} className={styles.linkToFeaturedPost} >
-              Ler post completo
-            </Link>
-          </div>
-        </section>
-
-        <section className={styles.postsSection}>
-          {
-            posts.map((post: IPostResponse) => {
-              return (
-                <Link href={`/posts/${post.slug}`} key={post._id} >
-                  <PostComponent
-                    title={post.title}
-                    images={post.images && post.images?.length > 0 ? post.images : ["/default-image.png"]}
-                    createdAt={post.createdAt}
-                  />
+        {posts.length > 0 ? (
+          <>
+            <h2 className={styles.subtitle}>Em destaque</h2>
+            <section className={styles.imageContainer}>
+              <Image
+                src={featuredPost.images![0]}
+                alt={"Imagem em destaque"}
+                width={800}
+                height={500}
+                className={styles.featuredImage}
+              />
+    
+              <div className={styles.overImage}>
+                <h3 className={styles.featuredPostTitle}>{featuredPost.title}</h3>
+                <Link href={`/posts/${featuredPost.slug}`} className={styles.linkToFeaturedPost} >
+                  Ler post completo
                 </Link>
-              )
-            })
-          }
-        </section>
-        
+              </div>
+            </section>
+    
+            <section className={styles.postsSection}>
+              {
+                posts.map((post: IPostResponse) => {
+                  return (
+                    <Link href={`/posts/${post.slug}`} key={post._id} >
+                      <PostComponent
+                        title={post.title}
+                        images={post.images && post.images?.length > 0 ? post.images : ["/default-image.png"]}
+                        createdAt={post.createdAt}
+                      />
+                    </Link>
+                  )
+                })
+              }
+            </section>
+            
+          
+          </>
+          
+        ) : (<p className={styles.advise}>Sem posts registrados</p>)
+        }
+
       </main>
+        
     </>
   );
 }

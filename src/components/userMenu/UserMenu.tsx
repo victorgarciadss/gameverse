@@ -31,6 +31,11 @@ export default function UserMenu() {
         router.push(`/edit-user/${userId}`);
     }
 
+    function redirectToUserDataPage() {
+        const userId = data?.user.id;
+        router.push(`/my-info/${userId}`);
+    }
+
     return (
         <div>
             <Button
@@ -64,7 +69,7 @@ export default function UserMenu() {
                         display: "flex",
                         gap: "0.5rem"
                     }} 
-                    onClick={handleClose}
+                    onClick={redirectToUserDataPage}
                 >
                     <FaUserLarge />
                     Minha conta
