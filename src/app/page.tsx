@@ -68,7 +68,7 @@ export default async function Home() {
           
           </>
           
-        ) : (<p className={styles.advise}>Sem posts registrados</p>)
+          ) : (<p className={styles.advise}>Sem posts registrados</p>)
         }
 
       </main>

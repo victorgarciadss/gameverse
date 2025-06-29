@@ -65,7 +65,7 @@ export default function EditUser() {
             else {
                 showToastSuccess(userResp.message);
                 // adicionar verificação, se for admin, manda para dashboard, se for user, manda para a página de dados próprios
-                if(data.user.role === "admin") {
+                if(data?.user.role === "admin") {
                     router.push("/dashboard");
                 }
                 else {
