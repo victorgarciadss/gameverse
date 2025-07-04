@@ -48,7 +48,11 @@ export default async function PostPage(context: { params: Promise<{ slug: string
                         
                     </div>
                     <div className={styles.postContent}>
-                        {postFounded.content}
+                        {postFounded.content.split("\n").map((line, index) => (
+                            <p className={styles.paragraphContent} key={index}>
+                                {line}
+                            </p>
+                        ))}
                     </div>
                 </article>
             </main>
