@@ -3,7 +3,7 @@
 import { DashboardContextProps } from "@/utils/interfaces/dashboardInterfaces";
 import { IPostResponse } from "@/utils/interfaces/postInterfaces";
 import { IUserResponse } from "@/utils/interfaces/userInterfaces";
-import { createContext, useState } from "react"
+import { createContext, useState, useEffect } from "react"
 
 export const DashboardContext = createContext({} as DashboardContextProps);
 
@@ -14,6 +14,11 @@ export function DashboardProvider({ children } : { children : React.ReactNode })
     const [group, setGroup] = useState<"posts" | "users">("posts");
     const [postsQuantity, setPostsQuantity] = useState<number>(posts.length);
     const [usersQuantity, setUsersQuantity] = useState<number>(users.length);
+
+    useEffect(() => {
+        getPosts();
+        getUsers();
+    }, []);
 
     async function getPosts() {
         try {

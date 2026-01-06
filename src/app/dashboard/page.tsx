@@ -3,7 +3,7 @@
 import { Header } from "@/components/header";
 import styles from "./dashboard.module.css";
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import UserTable from "@/components/tables/UserTable";
 import PostTable from "@/components/tables/PostTable";
 import { DashboardContext } from "@/contexts/DashboardProvider";
@@ -14,16 +14,9 @@ export default function Dashboard() {
     const { posts,
         users,
         group,
-        getPosts,
-        getUsers,
         handleFetchPosts,
         handleFetchUsers
     } = useContext(DashboardContext);
-    
-    useEffect(() => {
-        getPosts();
-        getUsers();
-    }, []);
 
     return (
         <>

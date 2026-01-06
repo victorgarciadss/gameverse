@@ -43,7 +43,7 @@ export default function EditUser() {
         }
 
         fetchUser();
-    }, []);
+    }, [id]);
 
     async function handleUpdateUser(e: React.FormEvent, id: string) {
         e.preventDefault();

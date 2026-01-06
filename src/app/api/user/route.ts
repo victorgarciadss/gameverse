@@ -3,7 +3,7 @@ import { getAllUsers } from "@/server/user/fetchHandler";
 import { registerUser } from "@/server/user/registerHandler";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
     try {
         const users = await getAllUsers();
         return NextResponse.json(users);

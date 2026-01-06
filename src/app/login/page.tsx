@@ -21,7 +21,7 @@ export default function Login() {
         else if(state.success) {
             redirect("/");
         }
-    }, [state]);
+    }, [state, showToastError]);
     
     return (
         <main className={styles.loginContainer}>

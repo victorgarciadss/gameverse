@@ -33,7 +33,7 @@ export default function MyInfo() {
         }
 
         fetchUserData();
-    }, []);
+    }, [id]);
 
     
     function formatISODate(birthDate: Date) {

@@ -9,7 +9,7 @@ import { formatDate } from "@/utils/functions/formatDate";
 
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { ToastContext } from "@/contexts/ToastProvider";
 import { DashboardContext } from "@/contexts/DashboardProvider";
 

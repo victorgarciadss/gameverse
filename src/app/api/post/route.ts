@@ -1,5 +1,4 @@
 import { CustomError } from "@/errors/CustomError";
-import { deletePost } from "@/server/post/deleteHandler";
 import { getAllPosts } from "@/server/post/fetchHandler";
 import { registerPost } from "@/server/post/registerHandler";
 import { NextRequest, NextResponse } from "next/server";

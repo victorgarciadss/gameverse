@@ -1,7 +1,7 @@
 import { Header } from "@/components/header";
 import styles from "./page.module.css";
 import Image from "next/image";
-import { IPostResponse, PostProps } from "@/utils/interfaces/postInterfaces";
+import { IPostResponse } from "@/utils/interfaces/postInterfaces";
 import Link from "next/link";
 import PostComponent from "@/components/postComponent";
 
