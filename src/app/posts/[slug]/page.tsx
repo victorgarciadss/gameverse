@@ -8,7 +8,7 @@ export default async function PostPage(context: { params: Promise<{ slug: string
 
     const slugResolved = (await context.params).slug;
 
-    const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/post/${slugResolved}`, {
+    const data = await fetch(`/api/post/${slugResolved}`, {
         method: "GET",
         cache: "no-store"
     });

@@ -16,7 +16,7 @@ export default function UserTable({users} : {users: IUserResponse[]}) {
 
     async function deleteUser(id: string) {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/${id}`, {
+            const response = await fetch(`/api/user/${id}`, {
                 method: "DELETE"
             });
 

@@ -73,7 +73,7 @@ export default function EditPost() {
         try{
             setLoading(true);
 
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/post/${slug}`, {
+            const response = await fetch(`/api/post/${slug}`, {
                 method: "PUT",
                 body: formData
             });
@@ -99,7 +99,7 @@ export default function EditPost() {
 
     useEffect(() => {
         async function fetchPost() {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/post/${slug}`, {
+            const response = await fetch(`/api/post/${slug}`, {
                 method: "GET",
                 cache: "no-store"
             });

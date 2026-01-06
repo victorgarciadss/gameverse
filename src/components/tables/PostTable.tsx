@@ -25,7 +25,7 @@ export default function PostTable({ posts } : PostTableProps) {
 
     async function deletePost(slug: string) {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/post/${slug}`, {
+            const response = await fetch(`/api/post/${slug}`, {
                 method: "DELETE"
             });
 

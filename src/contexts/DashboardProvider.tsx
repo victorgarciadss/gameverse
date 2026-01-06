@@ -22,7 +22,7 @@ export function DashboardProvider({ children } : { children : React.ReactNode })
 
     async function getPosts() {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/post`, {
+            const response = await fetch(`/api/post`, {
                 method: "GET",
                 cache: "no-store"
             });
@@ -37,7 +37,7 @@ export function DashboardProvider({ children } : { children : React.ReactNode })
 
     async function getUsers() {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, {
+            const response = await fetch(`/api/user`, {
                 method: "GET",
                 cache: "no-store"
             });
