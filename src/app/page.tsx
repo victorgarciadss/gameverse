@@ -7,7 +7,7 @@ import PostComponent from "@/components/postComponent";
 
 export default async function Home() {
 
-  const data = await fetch("http://localhost:3000/api/post", {
+  const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/post`, {
     method: "GET",
     cache: "no-store"
   });

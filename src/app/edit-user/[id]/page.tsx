@@ -32,7 +32,7 @@ export default function EditUser() {
 
     useEffect(() => {
         async function fetchUser() {
-            const response = await fetch(`http://localhost:3000/api/user/${id}`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/${id}`, {
                 method: "GET",
                 cache: "no-store"
             });
@@ -52,7 +52,7 @@ export default function EditUser() {
 
             setLoading(true);
 
-            const response = await fetch(`http://localhost:3000/api/user/${id}`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/${id}`, {
                 method: "PUT",
                 body: JSON.stringify(user)
             });
