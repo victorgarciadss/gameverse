@@ -18,6 +18,8 @@ export default function EditUser() {
     const router = useRouter();
     const { data } = useSession();
 
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || '';
+
 
     const [ user, setUser ] = useState({
         _id: "",
@@ -32,7 +34,7 @@ export default function EditUser() {
 
     useEffect(() => {
         async function fetchUser() {
-            const response = await fetch(`/api/user/${id}`, {
+            const response = await fetch(`${baseUrl}/api/user/${id}`, {
                 method: "GET",
                 cache: "no-store"
             });

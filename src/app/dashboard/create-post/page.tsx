@@ -17,6 +17,8 @@ export default function CreatePost() {
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [ loading, setLoading ] = useState<boolean>(false);
 
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || '';
+
     function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
         const newFile = event.target.files;
         if(!newFile) {
@@ -53,7 +55,7 @@ export default function CreatePost() {
         setLoading(true);
 
         try {
-            const response = await fetch(`/api/post`, {
+            const response = await fetch(`${baseUrl}/api/post`, {
                 method: "POST",
                 body: postData
             });
