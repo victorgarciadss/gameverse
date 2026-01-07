@@ -3,12 +3,13 @@ import styles from "./post.module.css";
 import { IPostResponse } from "@/utils/interfaces/postInterfaces";
 import Image from "next/image";
 import { formatDate } from "@/utils/functions/formatDate";
+import { BASE_URL } from "@/lib/api";
 
 export default async function PostPage(context: { params: Promise<{ slug: string }> }) {
 
     const slugResolved = (await context.params).slug;
 
-    const data = await fetch(`/api/post/${slugResolved}`, {
+    const data = await fetch(`${BASE_URL}/api/post/${slugResolved}`, {
         method: "GET",
         cache: "no-store"
     });

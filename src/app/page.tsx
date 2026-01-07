@@ -4,12 +4,11 @@ import Image from "next/image";
 import { IPostResponse } from "@/utils/interfaces/postInterfaces";
 import Link from "next/link";
 import PostComponent from "@/components/postComponent";
+import { BASE_URL } from "@/lib/api";
 
 export default async function Home() {
 
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || '';
-
-  const data = await fetch(`${baseUrl}/api/post`, {
+  const data = await fetch(`${BASE_URL}/api/post`, {
     method: "GET",
     cache: "no-store"
   });

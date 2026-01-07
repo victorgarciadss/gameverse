@@ -8,6 +8,7 @@ import { MdDelete } from "react-icons/md";
 import { DashboardContext } from "@/contexts/DashboardProvider";
 
 import Link from "next/link";
+import { BASE_URL } from "@/lib/api";
 
 export default function UserTable({users} : {users: IUserResponse[]}) {
 
@@ -16,7 +17,7 @@ export default function UserTable({users} : {users: IUserResponse[]}) {
 
     async function deleteUser(id: string) {
         try {
-            const response = await fetch(`/api/user/${id}`, {
+            const response = await fetch(`${BASE_URL}/api/user/${id}`, {
                 method: "DELETE"
             });
 

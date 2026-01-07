@@ -1,4 +1,5 @@
 
+import { BASE_URL } from "@/lib/api";
 import { signIn } from "next-auth/react";
 
 export async function registerAction(prevState: any, formData: FormData) {
@@ -12,7 +13,7 @@ export async function registerAction(prevState: any, formData: FormData) {
 
     try {
         
-        const response = await fetch(`/api/user`, {
+        const response = await fetch(`${BASE_URL}/api/user`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

@@ -9,6 +9,7 @@ import { ToastContext } from "@/contexts/ToastProvider";
 import { ImSpinner8 } from "react-icons/im";
 
 import { useSession } from "next-auth/react";
+import { BASE_URL } from "@/lib/api";
 
 export default function EditUser() {
 
@@ -17,8 +18,6 @@ export default function EditUser() {
 
     const router = useRouter();
     const { data } = useSession();
-
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || '';
 
 
     const [ user, setUser ] = useState({
@@ -34,7 +33,7 @@ export default function EditUser() {
 
     useEffect(() => {
         async function fetchUser() {
-            const response = await fetch(`${baseUrl}/api/user/${id}`, {
+            const response = await fetch(`${BASE_URL}/api/user/${id}`, {
                 method: "GET",
                 cache: "no-store"
             });
@@ -54,7 +53,7 @@ export default function EditUser() {
 
             setLoading(true);
 
-            const response = await fetch(`/api/user/${id}`, {
+            const response = await fetch(`${BASE_URL}/api/user/${id}`, {
                 method: "PUT",
                 body: JSON.stringify(user)
             });

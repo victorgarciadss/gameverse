@@ -14,6 +14,7 @@ import { useSession } from "next-auth/react";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { BASE_URL } from "@/lib/api";
 
 export default function EditPost() {
 
@@ -31,8 +32,6 @@ export default function EditPost() {
     const [existingFiles, setExistingFiles] = useState<string[]>([]);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [ loading, setLoading ] = useState<boolean>(false);
-
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || '';
     
 
     function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -75,7 +74,7 @@ export default function EditPost() {
         try{
             setLoading(true);
 
-            const response = await fetch(`${baseUrl}/api/post/${slug}`, {
+            const response = await fetch(`${BASE_URL}/api/post/${slug}`, {
                 method: "PUT",
                 body: formData
             });
@@ -101,7 +100,7 @@ export default function EditPost() {
 
     useEffect(() => {
         async function fetchPost() {
-            const response = await fetch(`${baseUrl}/api/post/${slug}`, {
+            const response = await fetch(`${BASE_URL}/api/post/${slug}`, {
                 method: "GET",
                 cache: "no-store"
             });

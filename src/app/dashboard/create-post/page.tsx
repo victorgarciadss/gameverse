@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ImSpinner8 } from "react-icons/im";
 import { ToastContext } from "@/contexts/ToastProvider";
+import { BASE_URL } from "@/lib/api";
 
 export default function CreatePost() {
 
@@ -16,8 +17,6 @@ export default function CreatePost() {
     const [files, setFiles] = useState<File[]>([]);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [ loading, setLoading ] = useState<boolean>(false);
-
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || '';
 
     function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
         const newFile = event.target.files;
@@ -55,7 +54,7 @@ export default function CreatePost() {
         setLoading(true);
 
         try {
-            const response = await fetch(`${baseUrl}/api/post`, {
+            const response = await fetch(`${BASE_URL}/api/post`, {
                 method: "POST",
                 body: postData
             });

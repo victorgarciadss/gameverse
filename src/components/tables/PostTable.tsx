@@ -12,6 +12,7 @@ import { MdDelete } from "react-icons/md";
 import { useContext } from "react";
 import { ToastContext } from "@/contexts/ToastProvider";
 import { DashboardContext } from "@/contexts/DashboardProvider";
+import { BASE_URL } from "@/lib/api";
 
 type PostTableProps = {
     posts: IPostResponse[];
@@ -25,7 +26,7 @@ export default function PostTable({ posts } : PostTableProps) {
 
     async function deletePost(slug: string) {
         try {
-            const response = await fetch(`/api/post/${slug}`, {
+            const response = await fetch(`${BASE_URL}/api/post/${slug}`, {
                 method: "DELETE"
             });
 

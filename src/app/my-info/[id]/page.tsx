@@ -11,6 +11,7 @@ import { useContext, useEffect, useState } from "react";
 import { ToastContext } from "@/contexts/ToastProvider";
 import { ImSpinner8 } from "react-icons/im";
 import { signOut } from "next-auth/react";
+import { BASE_URL } from "@/lib/api";
 
 export default function MyInfo() {
 
@@ -23,7 +24,7 @@ export default function MyInfo() {
 
     useEffect(() => {
         async function fetchUserData() {
-            const response = await fetch(`/api/user/${id}`, {
+            const response = await fetch(`${BASE_URL}/api/user/${id}`, {
                 method: "GET",
                 cache: "no-store"
             });
@@ -44,7 +45,7 @@ export default function MyInfo() {
 
     async function deleteCount() {
         try {
-            const response = await fetch(`/api/user/${id}`, {
+            const response = await fetch(`${BASE_URL}/api/user/${id}`, {
                 method: "DELETE",
                 cache: "no-store"
             });

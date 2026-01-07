@@ -1,5 +1,6 @@
 "use client"
 
+import { BASE_URL } from "@/lib/api";
 import { DashboardContextProps } from "@/utils/interfaces/dashboardInterfaces";
 import { IPostResponse } from "@/utils/interfaces/postInterfaces";
 import { IUserResponse } from "@/utils/interfaces/userInterfaces";
@@ -22,7 +23,7 @@ export function DashboardProvider({ children } : { children : React.ReactNode })
 
     async function getPosts() {
         try {
-            const response = await fetch(`/api/post`, {
+            const response = await fetch(`${BASE_URL}/api/post`, {
                 method: "GET",
                 cache: "no-store"
             });
@@ -37,7 +38,7 @@ export function DashboardProvider({ children } : { children : React.ReactNode })
 
     async function getUsers() {
         try {
-            const response = await fetch(`/api/user`, {
+            const response = await fetch(`${BASE_URL}/api/user`, {
                 method: "GET",
                 cache: "no-store"
             });
